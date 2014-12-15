@@ -36,21 +36,21 @@ class: center, middle
 
 # Why won't this change??
 
-1. When two selectors apply to the same element, the most specific wins.
-
----
-
-# Why won't this change??
-
-1. When two selectors apply to the same element, the most specific wins.
 1. When two selectors are the same, the last one wins.
 
 ---
 
 # Why won't this change??
 
+1. When two selectors are the same, the last one wins.
 1. When two selectors apply to the same element, the most specific wins.
+
+---
+
+# Why won't this change??
+
 1. **When two selectors are the same, the last one wins.**
+1. When two selectors apply to the same element, the most specific wins.
 
 ---
 
@@ -112,8 +112,8 @@ class: center, middle
 
 # Why won't this change??
 
-1. **When two selectors apply to the same element, the most specific wins.**
 1. When two selectors are the same, the last one wins.
+1. **When two selectors apply to the same element, the most specific wins.**
 
 ---
 
@@ -164,7 +164,9 @@ Inline Styles | IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo
 
 # How to calculate selector specificity
 
-`#mainContent .image-controls:hover input[type="checkbox"]::before`
+```css
+#mainContent .image-controls:hover input[type="checkbox"]::before
+```
 
 Inline Styles | IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements
 --------------|-----|----------------------------------------|---------------------------
@@ -175,6 +177,10 @@ Inline Styles | IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo
 ---
 
 # How to calculate selector specificity
+
+```css
+#mainContent .image-controls:hover input[type="checkbox"]::before
+```
 
 Inline Styles | IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements
 --------------|-----|----------------------------------------|---------------------------
@@ -214,6 +220,10 @@ IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements| Count
  | `.a`, `.b`, `.c`, `.d`, `.e`, `.f`, `.g` |  | **(0, 0, 7, 0)**
 `#secondaryNav` | `.selected` | | **(0, 1, 1, 0)**
  | `:focus` | `a` | **(0, 0, 1, 1)**
+
+---
+
+# Questions?
 
 ---
 
