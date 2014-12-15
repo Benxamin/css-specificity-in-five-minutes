@@ -54,15 +54,22 @@ class: center, middle
 
 ---
 
+# Page Load Order
+## determines rule precedence
+
+---
+
+# User Agent
+## Default styles are always first.
+
+---
+
 # You can always override 
 #by going .demo.maroon[_last_].
 
 ---
 
-# Why won't this change??
-
-1. When two selectors apply to the same element, the most specific wins.
-1. **When two selectors are the same, the last one wins.**
+# The last one wins
 
 ```css
 .blue { color: #00F; }
@@ -73,10 +80,7 @@ class: center, middle
 ```
 ---
 
-# Why won't this change??
-
-1. When two selectors apply to the same element, the most specific wins.
-1. **When two selectors are the same, the last one wins.**
+# The last one wins
 
 ```css
 .blue { color: #00F; }
@@ -90,10 +94,7 @@ class: center, middle
 
 ---
 
-# Why won't this change??
-
-1. When two selectors apply to the same element, the most specific wins.
-1. **When two selectors are the same, the last one wins.**
+# The last one wins
 
 ```css
 .blue { color: #00F; }
@@ -143,57 +144,81 @@ ___ a:focus
 
 ---
 
-
-
 # How to calculate selector specificity
 
-IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements
+Inline Styles | IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements
 ----|----------------------------------------|---------------------------
- | | 
+ | | | 
 
 ---
 
 # How to calculate selector specificity
-IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements
-----|----------------------------------------|---------------------------
-`#mainContent` | `.img-controls` | `div`
- | `[type="checkbox"]` | `::before`
- | `:hover` | 
+
+Inline Styles | IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements
+--------------|-----|----------------------------------------|---------------------------
+ | `#mainContent` | `.img-controls` | `input`
+ |  | `[type="checkbox"]` | `::before`
+ |  | `:hover` | 
 
 ---
 
-## Sort the following selectors by specificity.
+# How to calculate selector specificity
 
-IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements| Count
-----|----------------------------------------|---------------------------|------
+`#mainContent .image-controls:hover input[type="checkbox"]::before`
+
+Inline Styles | IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements
+--------------|-----|----------------------------------------|---------------------------
+ | `#mainContent` | `.img-controls` | `input`
+ |  | `[type="checkbox"]` | `::before`
+ |  | `:hover` | 
+
+---
+
+# How to calculate selector specificity
+
+Inline Styles | IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements
+--------------|-----|----------------------------------------|---------------------------
+ | `#mainContent` | `.img-controls` | `input`
+ |  | `[type="checkbox"]` | `::before`
+ |  | `:hover` | 
+ 0 | 1 | 3 | 2
+
+= (0, 1, 3, 2)
+
+
+
+---
+
+## Practical count
+
+IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements| Counts
+----|----------------------------------------|---------------------------|-------
   | | `p` | **(0, 0, 1)**
   | `:first-child` | `li`, `a` | **(0, 1, 2)**
   | | `nav`, `ul`, `li` | **(0, 0, 3)**
-  | | | **(0, 0, 0)**
+  | | `body`, `*`| **(0, 0, 2)**
   | `.a`, `.b`, `.c`, `.d`, `.e`, `.f`, `.g` |  | **(0, 7, 0)**
 `#secondaryNav` | `.selected` | | **(1, 1, 0)**
   | `:focus` | `a` | **(0, 1, 1)**
 
+---
+
+## Official ranking
+
+ IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements| Counts
+-----|----------------------------------------|---------------------------|-------
+ | | `p` | **(0, 0, 0, 1)**
+ | `:first-child` | `li`, `a` | **(0, 0, 1, 2)**
+ | | `nav`, `ul`, `li` | **(0, 0, 0, 3)**
+ | | `body`, `*`| **(0, 0, 0, 2)**
+ | `.a`, `.b`, `.c`, `.d`, `.e`, `.f`, `.g` |  | **(0, 0, 7, 0)**
+`#secondaryNav` | `.selected` | | **(0, 1, 1, 0)**
+ | `:focus` | `a` | **(0, 0, 1, 1)**
 
 ---
 
-## BODY vs P
-
-```css
-body { color: red; }
-p { color: green; }
-```
-
-```html
-<body>
-  Body color
-  <p>Paragraph color</p>
-</body>
-
-
----
-
-
+# Thank you
+_@benxamin_
 
     </textarea>
     <script src="//gnab.github.io/remark/downloads/remark-latest.min.js">
