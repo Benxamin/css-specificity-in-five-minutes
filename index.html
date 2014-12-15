@@ -11,6 +11,14 @@
         font-weight: normal;  
       }
       .remark-code, .remark-inline-code { font-family: 'Inconsolata'; }
+      #css-specificity { font-size: 6em; line-height:1; letter-spacing:-0.015em; }
+      table { border: 1px solid #333; border-collapse: collapse; }
+      th { border: 1px solid #333; background: #f6f6f6; padding: 0.25em 0.5em; width:25%; }
+      td { border: 1px solid #333; padding: 0.5em 1em; }
+      .demo.maroon { color: maroon; }
+      .demo.true { color: blue; font-weight: bold; }
+      .demo.blue { color: blue; font-weight: bold; }
+      .demo.blue { color: #05F; font-weight: bold; }
     </style>
   </head>
   <body>
@@ -18,25 +26,180 @@
 
 class: center, middle
 
-# Title
+# CSS Specificity
 
 ---
 
-# Agenda
-
-1. Introduction
-2. Deep-dive
-3. ...
+# Why won't this change??
 
 ---
 
-# Introduction
+# Why won't this change??
+
+1. When two selectors apply to the same element, the most specific wins.
+
+---
+
+# Why won't this change??
+
+1. When two selectors apply to the same element, the most specific wins.
+1. When two selectors are the same, the last one wins.
+
+---
+
+# Why won't this change??
+
+1. When two selectors apply to the same element, the most specific wins.
+1. **When two selectors are the same, the last one wins.**
+
+---
+
+# You can always override 
+#by going .demo.maroon[_last_].
+
+---
+
+# Why won't this change??
+
+1. When two selectors apply to the same element, the most specific wins.
+1. **When two selectors are the same, the last one wins.**
+
+```css
+.blue { color: #00F; }
+.blue { color: #05F; }
+```
+```html
+<p class="blue">Pacific Blue</p>
+```
+---
+
+# Why won't this change??
+
+1. When two selectors apply to the same element, the most specific wins.
+1. **When two selectors are the same, the last one wins.**
+
+```css
+.blue { color: #00F; }
+.blue { color: #05F; }
+```
+```html
+<p class="blue">Pacific Blue</p>
+```
+
+.demo.blue[Pacific Blue]
+
+---
+
+# Why won't this change??
+
+1. When two selectors apply to the same element, the most specific wins.
+1. **When two selectors are the same, the last one wins.**
+
+```css
+.blue { color: #00F; }
+.blue { color: #05F; }
+```
+```html
+<p class="blue">Pacific Blue</p>
+```
+
+.demo.true[True Blue]
+
+.demo.blue[Pacific Blue]
+
+---
+
+# Why won't this change??
+
+1. **When two selectors apply to the same element, the most specific wins.**
+1. When two selectors are the same, the last one wins.
+
+---
+
+# The .demo.maroon[_most specific_] wins.
+
+---
+
+## Sort the following selectors by specificity.
+
+___ p
+
+___ li:first-child a
+
+___ nav ul li
+
+___ body *
+
+___ .a.b.c.d.e.f.g
+
+___ #secondaryNav.selected
+
+___ a:focus
+
+
+---
+
+# How to calculate selector specificity
+
+---
+
+
+
+# How to calculate selector specificity
+
+IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements
+----|----------------------------------------|---------------------------
+ | | 
+
+---
+
+# How to calculate selector specificity
+IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements
+----|----------------------------------------|---------------------------
+`#mainContent` | `.img-controls` | `div`
+ | `[type="checkbox"]` | `::before`
+ | `:hover` | 
+
+---
+
+## Sort the following selectors by specificity.
+
+IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements| Count
+----|----------------------------------------|---------------------------|------
+  | | `p` | **(0, 0, 1)**
+  | `:first-child` | `li`, `a` | **(0, 1, 2)**
+  | | `nav`, `ul`, `li` | **(0, 0, 3)**
+  | | | **(0, 0, 0)**
+  | `.a`, `.b`, `.c`, `.d`, `.e`, `.f`, `.g` |  | **(0, 7, 0)**
+`#secondaryNav` | `.selected` | | **(1, 1, 0)**
+  | `:focus` | `a` | **(0, 1, 1)**
+
+
+---
+
+## BODY vs P
+
+```css
+body { color: red; }
+p { color: green; }
+```
+
+```html
+<body>
+  Body color
+  <p>Paragraph color</p>
+</body>
+
+
+---
+
+
 
     </textarea>
     <script src="//gnab.github.io/remark/downloads/remark-latest.min.js">
     </script>
     <script>
-      var slideshow = remark.create();
+      var slideshow = remark.create({ slideshowURI: '' });
     </script>
   </body>
 </html>
