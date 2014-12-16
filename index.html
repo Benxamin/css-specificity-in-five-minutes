@@ -22,6 +22,10 @@
       .demo.hilite { background: rgb(220, 255, 133); color: blue; }
       .demo.hilite.brown { background: rgb(220, 255, 133); color: brown; }
       .demo.hilite.red { background: rgb(220, 255, 133); color: red; }
+      .dark { background: #2B303B; color: #ddd; padding: 0.35em 1em 0.5em; margin-bottom:1em; }
+      .id { color: #86A1B3; }
+      .class { color: #D08770; }
+      .el { color: #BC544E; }
     </style>
   </head>
   <body>
@@ -36,7 +40,7 @@ class: center, middle
 # Why won't this change??
 
 ---
-
+  
 # Why won't this change??
 
 1. When two selectors are the same, the last one wins.
@@ -198,58 +202,317 @@ ___ a:focus
 
 ---
 
-# How to calculate selector specificity
+# How to Calculate Selector Specificity!
 
 ---
 
-# How to calculate selector specificity
+# 1. Know your groups
 
 Inline Styles | IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements
 ----|----------------------------------------|---------------------------
- | | | 
+ <br> | <br> | <br> | <br> 
 
 ---
 
-# How to calculate selector specificity
+# 2. Find a selector
+
+.dark[
+  `#mainContent .image-controls:hover input[type="checkbox"]::before`
+]
 
 Inline Styles | IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements
 --------------|-----|----------------------------------------|---------------------------
- | `#mainContent` | `.img-controls` | `input`
- |  | `[type="checkbox"]` | `::before`
- |  | `:hover` | 
+ <br> | <br> | <br> | <br> 
+
 
 ---
 
-# How to calculate selector specificity
+# 3. Break it down
 
-```css
-#mainContent .image-controls:hover input[type="checkbox"]::before
-```
+.dark[
+  .id[`#mainContent`] .image-controls:hoverinput[type="checkbox"]::before
+]
 
 Inline Styles | IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements
 --------------|-----|----------------------------------------|---------------------------
- | `#mainContent` | `.img-controls` | `input`
- |  | `[type="checkbox"]` | `::before`
- |  | `:hover` | 
+ | .id[`#mainContent`] | | 
 
 ---
 
-# How to calculate selector specificity
+# 3. Break it down
 
-```css
-#mainContent .image-controls:hover input[type="checkbox"]::before
-```
+.dark[
+  .id[`#mainContent`] .class[.image-controls]:hover input[type="checkbox"]::before
+]
 
 Inline Styles | IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements
 --------------|-----|----------------------------------------|---------------------------
- | `#mainContent` | `.img-controls` | `input`
- |  | `[type="checkbox"]` | `::before`
- |  | `:hover` | 
+ | .id[`#mainContent`] | .class[`.img-controls`] | 
+
+---
+
+# 3. Break it down
+
+.dark[
+  .id[`#mainContent`] .class[.image-controls:hover] input[type="checkbox"]::before
+]
+
+Inline Styles | IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements
+--------------|-----|----------------------------------------|---------------------------
+ | .id[`#mainContent`] | .class[`.img-controls`] | 
+ |  | .class[`:hover`] | 
+---
+
+# 3. Break it down
+
+.dark[
+  .id[`#mainContent`] .class[.image-controls:hover] .el[input][type="checkbox"]::before
+]
+
+Inline Styles | IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements
+--------------|-----|----------------------------------------|---------------------------
+ | .id[`#mainContent`] | .class[`.img-controls`] | .el['input']
+ |  | .class[`:hover`] | 
+
+---
+
+# 3. Break it down
+
+.dark[
+  .id[`#mainContent`] .class[.image-controls:hover] .el[input].class[[type="checkbox"]]::before
+]
+
+Inline Styles | IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements
+--------------|-----|----------------------------------------|---------------------------
+ | .id[`#mainContent`] | .class[`.img-controls`] | .el['input']
+ | | .class[`:hover`] | 
+ | | .class[[type="checkbox"]] | 
+
+---
+
+# 3. Break it down
+
+.dark[
+  .id[`#mainContent`] .class[.image-controls:hover] .el[input].class[[type="checkbox"]].el[::before]
+]
+
+Inline Styles | IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements
+--------------|-----|----------------------------------------|---------------------------
+ | .id[`#mainContent`] | .class[`.img-controls`] | .el['input']
+ | | .class[`:hover`] | .el['::before']
+ | | .class[[type="checkbox"]] | 
+
+---
+
+# 3. Tally it up
+
+.dark[
+  .id[`#mainContent`] .class[.image-controls:hover] .el[input].class[[type="checkbox"]].el[::before]
+]
+
+Inline Styles | IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements
+--------------|-----|----------------------------------------|---------------------------
+ | .id[`#mainContent`] | .class[`.img-controls`] | .el['input']
+ | | .class[`:hover`] | .el['::before']
+ | | .class[[type="checkbox"]] | 
+ 0 |  |  | 
+
+---
+
+# 3. Tally it up
+
+.dark[
+  .id[`#mainContent`] .class[.image-controls:hover] .el[input].class[[type="checkbox"]].el[::before]
+]
+
+Inline Styles | IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements
+--------------|-----|----------------------------------------|---------------------------
+ | .id[`#mainContent`] | .class[`.img-controls`] | .el['input']
+ | | .class[`:hover`] | .el['::before']
+ | | .class[[type="checkbox"]] | 
+ 0 | 1 |  | 
+
+---
+
+# 3. Tally it up
+
+.dark[
+  .id[`#mainContent`] .class[.image-controls:hover] .el[input].class[[type="checkbox"]].el[::before]
+]
+
+Inline Styles | IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements
+--------------|-----|----------------------------------------|---------------------------
+ | .id[`#mainContent`] | .class[`.img-controls`] | .el['input']
+ | | .class[`:hover`] | .el['::before']
+ | | .class[[type="checkbox"]] | 
+ 0 | 1 | 3 | 
+
+---
+
+# 3. Tally it up
+
+.dark[
+  .id[`#mainContent`] .class[.image-controls:hover] .el[input].class[[type="checkbox"]].el[::before]
+]
+
+Inline Styles | IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements
+--------------|-----|----------------------------------------|---------------------------
+ | .id[`#mainContent`] | .class[`.img-controls`] | .el['input']
+ | | .class[`:hover`] | .el['::before']
+ | | .class[[type="checkbox"]] | 
+ 0 | 1 | 3 | 2
+
+---
+
+# 3. Tally it up
+
+.dark[
+  .id[`#mainContent`] .class[.image-controls:hover] .el[input].class[[type="checkbox"]].el[::before]
+]
+
+Inline Styles | IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements
+--------------|-----|----------------------------------------|---------------------------
+ | .id[`#mainContent`] | .class[`.img-controls`] | .el['input']
+ | | .class[`:hover`] | .el['::before']
+ | | .class[[type="checkbox"]] | 
  0 | 1 | 3 | 2
 
 = (0, 1, 3, 2)
+---
 
+# Now we know the specificty...
 
+.dark[
+  `#mainContent .image-controls:hover input[type="checkbox"]::before`
+]
+
+= (0, 1, 3, 2)
+
+---
+
+# 4. Compare it
+
+.dark[
+  `#mainContent .image-controls:hover input[type="checkbox"]::before`
+]
+
+= (0, 1, 3, 2)
+
+.dark[
+  `#mainContent .results div.thumb.small`
+]
+
+---
+
+# 4. Compare it
+
+.dark[
+  `#mainContent .image-controls:hover input[type="checkbox"]::before`
+]
+
+= (0, 1, 3, 2)
+
+.dark[
+  `#mainContent .results div.thumb.small`
+]
+
+= (0, 1, 3, 1)
+
+---
+
+# 4. Compare it
+
+.dark[
+  `#mainContent .image-controls:hover input[type="checkbox"]::before`
+]
+
+= (0, 1, 3, 2)
+
+.dark[
+  `#mainContent .results div.thumb.small`
+]
+
+= (0, 1, 3, 1)
+
+.dark[
+  `#mainContent .wall .profile nav > li a:hover`
+]
+
+---
+
+# 4. Compare it
+
+.dark[
+  `#mainContent .image-controls:hover input[type="checkbox"]::before`
+]
+
+= (0, 1, 3, 2)
+
+.dark[
+  `#mainContent .results div.thumb.small`
+]
+
+= (0, 1, 3, 1)
+
+.dark[
+  `#mainContent .wall .profile nav>li a:hover`
+]
+
+= (0, 1, 3, 3)
+
+---
+
+# 4. Compare it
+
+.dark[
+  `#mainContent .image-controls:hover input[type="checkbox"]::before`
+]
+
+= (0, 1, 3, 2)
+
+.dark[
+  `#mainContent .results div.thumb.small`
+]
+
+= (0, 1, 3, 1)
+
+.dark[
+  `#mainContent .wall .profile nav>li a:hover`
+]
+
+= (0, 1, 3, 3)
+
+.dark[
+  `#mainContent #sidebar`
+]
+
+---
+
+# 4. Compare it
+
+.dark[
+  `#mainContent .image-controls:hover input[type="checkbox"]::before`
+]
+
+= (0, 1, 3, 2)
+
+.dark[
+  `#mainContent .results div.thumb.small`
+]
+
+= (0, 1, 3, 1)
+
+.dark[
+  `#mainContent .wall .profile nav>li a:hover`
+]
+
+= (0, 1, 3, 3)
+
+.dark[
+  `#mainContent #sidebar`
+]
+
+= (0, 2, 0, 0)
 
 ---
 
@@ -267,7 +530,7 @@ IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements| Count
 
 ---
 
-## Official ranking
+## Official counts
 
  IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements| Counts
 -----|----------------------------------------|---------------------------|-------
@@ -278,6 +541,20 @@ IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements| Count
  | `.a`, `.b`, `.c`, `.d`, `.e`, `.f`, `.g` |  | **(0, 0, 7, 0)**
 `#secondaryNav` | `.selected` | | **(0, 1, 1, 0)**
  | `:focus` | `a` | **(0, 0, 1, 1)**
+
+---
+
+## Final ranking
+
+ IDs | Classes, [attributes], :pseudo-classes | Elements, :pseudo-elements| Counts
+-----|----------------------------------------|---------------------------|-------
+`#secondaryNav` | `.selected` | | **(0, 1, 1, 0)**
+ | `.a`, `.b`, `.c`, `.d`, `.e`, `.f`, `.g` |  | **(0, 0, 7, 0)**
+ | `:first-child` | `li`, `a` | **(0, 0, 1, 2)**
+ | `:focus` | `a` | **(0, 0, 1, 1)**
+ | | `nav`, `ul`, `li` | **(0, 0, 0, 3)**
+ | | `body`, `*`| **(0, 0, 0, 2)**
+ | | `p` | **(0, 0, 0, 1)**
 
 ---
 
