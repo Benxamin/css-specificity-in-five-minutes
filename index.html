@@ -19,6 +19,9 @@
       .demo.true { color: blue; font-weight: bold; }
       .demo.blue { color: blue; font-weight: bold; }
       .demo.blue { color: #05F; font-weight: bold; }
+      .demo.hilite { background: rgb(220, 255, 133); color: blue; }
+      .demo.hilite.brown { background: rgb(220, 255, 133); color: brown; }
+      .demo.hilite.red { background: rgb(220, 255, 133); color: red; }
     </style>
   </head>
   <body>
@@ -94,19 +97,74 @@ class: center, middle
 
 ---
 
-# The last one wins
+### (Compare blues)
 
 ```css
-.blue { color: #00F; }
+    p { color: #00F; }
 .blue { color: #05F; }
 ```
 ```html
+<p>True Blue</p>
 <p class="blue">Pacific Blue</p>
 ```
 
 .demo.true[True Blue]
 
 .demo.blue[Pacific Blue]
+
+---
+
+# Order matters
+
+```html
+<p class="hilite">This is first</p>
+<style>.hilite { background: rgb(220, 255, 133); color: blue; }</style>
+<p class="hilite">This is second</p>
+<p class="hilite">This is third</p>
+<p class="hilite">This is last</p>
+```
+
+<p class="demo hilite">This is first</p>
+<p class="demo hilite">This is second</p>
+<p class="demo hilite">This is third</p>
+<p class="demo hilite">This is last</p>
+
+---
+
+# Relation to elements does not
+
+```html
+<p class="hilite">This is first</p>
+<style>.hilite { background: rgb(220, 255, 133); color: blue; }</style>
+<p class="hilite">This is second</p>
+<style>.hilite { background: rgb(220, 255, 133); color: brown; }</style>
+<p class="hilite">This is third</p>
+<p class="hilite">This is last</p>
+```
+
+<p class="demo hilite brown">This is first</p>
+<p class="demo hilite brown">This is second</p>
+<p class="demo hilite brown">This is third</p>
+<p class="demo hilite brown">This is last</p>
+
+---
+
+# No matter where it is on the page, .demo.maroon[_last_] one wins
+
+```html
+<p class="hilite">This is first</p>
+<style>.hilite { background: rgb(220, 255, 133); color: blue; }</style>
+<p class="hilite">This is second</p>
+<style>.hilite { background: rgb(220, 255, 133); color: brown; }</style>
+<p class="hilite">This is third</p>
+<style>.hilite { background: rgb(220, 255, 133); color: red; }</style>
+<p class="hilite">This is last</p>
+```
+
+<p class="demo hilite red">This is first</p>
+<p class="demo hilite red">This is second</p>
+<p class="demo hilite red">This is third</p>
+<p class="demo hilite red">This is last</p>
 
 ---
 
