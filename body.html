@@ -2,13 +2,48 @@
 <head>
 	<title>BODY vs P</title>
 	<style>
-body * { color:red; }
-p      { color:green; margin: 0;}
+body * { color:black; }
+p      { color:green; margin: 0; }
+h1, h2, h3, h4, h5, h6 { margin:0 0 1em; }
+#mainContent { margin:3em 0 1em; }
+.media-controls { border: 3px solid #eee; padding:1em; }
+.media-controls > * { border:1px solid #666; margin-bottom: -1px; background: #f1f1f1; padding: 0.5em 1em; }
+.media-controls > div:focus,
+.media-controls > div:hover { background: #ccc; }
+input[type="checkbox"] { margin-left: 1em; }
+#mainContent .image-controls:hover input[type="checkbox"]::before { content: "*"; color: maroon; font-weight:bold; position: relative; left:-1em;}
 	</style>
 </head>
 <body>
 	Body text
 	<div>Body div text</div>
 	<p>Paragraph text</p>
+
+
+
+	<div id="mainContent">
+		<h3>Giant selector test</h3>
+		<div class="media-controls">
+			<h5>Media controls</h5>
+			<div class="audio-controls" tabindex="0">
+				<h6>Audio controls</h6>
+				<button>Rewind</button>
+				<button>Play</button>
+				<button>Fast Forward</button>
+			</div>
+			<div class="image-controls" tabindex="0">
+				<h6>Image controls</h6>
+				<input type="checkbox"> Check this
+				<input type="text">
+			</div>
+			<div class="video-controls" tabindex="0">
+				<h6>Video controls</h6>
+				<button>Rewind</button>
+				<button>Play</button>
+				<button>Fast Forward</button>
+			</div>
+		</div>
+
+	</div>
 </body>
 </html>
